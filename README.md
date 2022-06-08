@@ -1,6 +1,9 @@
 # gdm_bloc
 
-A new Flutter project.
+nothing much going on lib besides the asset feature (in asset_bloc you'll find _onRealtimeAssetSubscriptionRequested event who's responsible for the lag )
+
+the socket_api is inside the ngi_repository package 
+
 
 ## Getting Started
 
