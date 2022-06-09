@@ -97,7 +97,7 @@ const _$AssetDetailtypeEnumMap = {
   AssetDetailtype.commercialVehicle: 'commercial vehicle',
   AssetDetailtype.lightVehicle: 'light vehicle',
   AssetDetailtype.lighttruck: 'lighttruck',
-  AssetDetailtype.lou: 'LOU',
+  AssetDetailtype.lou: 'lou',
   AssetDetailtype.personalVehicle: 'personal vehicle',
   AssetDetailtype.pickup: 'pickup',
   AssetDetailtype.remorqueFrigo: 'remorque_frigo',

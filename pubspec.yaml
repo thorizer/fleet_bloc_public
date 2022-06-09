@@ -9,6 +9,7 @@ environment:
 dependencies:
   bloc: ^8.0.3
   drop_down_list: ^0.0.2
+  dropdown_button2: ^1.5.2
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1

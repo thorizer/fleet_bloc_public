@@ -46,7 +46,7 @@ class LeftDrawer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Padding(padding: EdgeInsets.all(8)),
-                          LeftDrawerDropDownList()
+                          LeftDrawerDropDown(),
                         ],
                       ),
                     )
@@ -71,37 +71,48 @@ class AssetsListSideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fleetAssets = context.select(
+      (AssetBloc bloc) => bloc.state.fleetAssets,
+    );
+
+    //print(fleetAssets);
     return ListView.builder(
       key: const PageStorageKey<String>('sidebar'),
       primary: false,
-      itemCount: context.select(
-        (AssetBloc bloc) => bloc.state.fleetAssets.length,
-      ),
+      itemCount: fleetAssets.length,
       itemExtent: 100,
       //shrinkWrap: false,
       physics: const ScrollPhysics(),
       itemBuilder: (context, index) {
-        return SizedBox(
-          height: 100,
-          child: Card(
-            margin: const EdgeInsets.all(5),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: SizedBox(
-                    height: 70,
-                    width: 70,
-                    child: AssetRtImage(index: index),
+        return Builder(builder: (context) {
+          final assetFromList = fleetAssets[index];
+          final rtFromList = context.select(
+            (AssetBloc bloc) => bloc.state.rt[assetFromList.id],
+          );
+          return SizedBox(
+            height: 100,
+            child: Card(
+              margin: const EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: 70,
+                      width: 70,
+                      child: Image.asset(
+                        'assets/images/fleet/${assetFromList.type!.name}/${rtFromList?.status}_3d.png',
+                      ),
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: AssetRtInfo(index: index),
-                )
-              ],
+                  Flexible(
+                    child: Text(assetFromList.name ?? 'Unnamed'),
+                  )
+                ],
+              ),
             ),
-          ),
-        );
+          );
+        });
       },
     );
   }
@@ -117,6 +128,7 @@ class AssetRtInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(index);
     final assetName = context.select(
       (AssetBloc bloc) => bloc.state.fleetAssets[index].name ?? 'Unnamed',
     );

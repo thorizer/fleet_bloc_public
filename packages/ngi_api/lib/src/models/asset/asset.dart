@@ -557,7 +557,7 @@ enum AssetDetailtype {
   lightVehicle,
   @JsonValue('lighttruck')
   lighttruck,
-  @JsonValue('LOU')
+  @JsonValue('lou')
   lou,
   @JsonValue('personal vehicle')
   personalVehicle,

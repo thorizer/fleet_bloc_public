@@ -266,15 +266,15 @@ class AuthenticationRepository {
     final permissions = <String, String>{};
 
     for (final e in oldPermission ?? <String>[]) {
-      final perm = e.substring(0, 6);
+      final perm = e.split('_');
 
-      final create = perm[0] == 'C' ? '1' : '0';
-      final read = perm[1] == 'R' ? '1' : '0';
-      final update = perm[2] == 'U' ? '1' : '0';
-      final delete = perm[3] == 'D' ? '1' : '0';
-      final access = perm[5];
-
-      final module = e.substring(7);
+      final create = perm[0].contains('C') ? '1' : '0';
+      final read = perm[0].contains('R') ? '1' : '0';
+      final update = perm[0].contains('U') ? '1' : '0';
+      final delete = perm[0].contains('D') ? '1' : '0';
+      final access = perm[1];
+      final module = perm.sublist(2).join('_');
+      // final module = perm[2] + '_' + perm[3] + '_' + perm[4];
       final newPerm = '$access$create$read$update$delete';
       permissions[module] = newPerm;
     }

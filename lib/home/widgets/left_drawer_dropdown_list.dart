@@ -106,7 +106,7 @@ class _AppTextFieldState extends State<AppTextField> {
         dataList: widget.fleets ?? [],
         selectedItems: (List<dynamic> selectedList) {},
         selectedItem: (String selected) {
-          print(selected);
+          //print(selected);
           widget.textEditingController.text = selected;
         },
         enableMultipleSelection: false,

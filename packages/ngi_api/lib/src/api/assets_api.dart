@@ -51,8 +51,9 @@ class AssetsApi {
       );
 
       return AssetQuery.fromJson(assetListResult as Map<String, dynamic>);
-    } catch (e) {
+    } catch (e, stackTrace) {
       print(e.toString());
+      print(stackTrace.toString());
       throw AssetListJsonDecodeFailure();
     }
   }

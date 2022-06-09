@@ -100,7 +100,7 @@ class SocketApi {
         try {
           streamSocket
               .addResponse(Asset.fromJson(data as Map<String, dynamic>));
-          //print(data['name']);
+          print(data['name']);
         } catch (e, stackTrace) {
           print('Exception newMsg');
           print(e);

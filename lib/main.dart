@@ -17,18 +17,19 @@ class MyHttpOverrides extends HttpOverrides {
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
       ..badCertificateCallback = (X509Certificate cert, String host, int port) {
-        final isValidHost = host == "" ||
-            host == "" ||
-            host == "" ||
-            host == "" ||
-            host == "" ||
-            host == "" ||
-            host == "" ||
-            host == "";
+        final isValidHost = host == "tcfleet.ngi.tn" ||
+            host == "10.20.160.105:4999" ||
+            host == "civ.tc-fleet.com" ||
+            host == "mar.tc-fleet.com" ||
+            host == "new.ngi-gps.com" ||
+            host == "app.ngi-gps.com" ||
+            host == "41.224.35.21:7821" ||
+            host == "orion-track.com";
         return isValidHost;
       };
   }
-}
+} 
+
 
 void main() {
   FlutterError.onError = (details) {
