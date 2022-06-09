@@ -39,7 +39,14 @@ class LoginForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Authentication Failure'), backgroundColor: Colors.redAccent),
+              SnackBar(
+                  content: Text(
+                    context.select(
+                      (LoginBloc bloc) => bloc.state.error,
+                    ),
+                    style: TextStyle(fontSize: 8),
+                  ),
+                  backgroundColor: Colors.redAccent),
             );
         }
       },
@@ -63,7 +70,8 @@ class LoginForm extends StatelessWidget {
 
                 //SvgPicture.asset('assets/images/login.svg', height: size.height * 0.4),
 
-                Image.asset('assets/images/login/ngi.png', height: size.height * 0.4),
+                Image.asset('assets/images/login/ngi.png',
+                    height: size.height * 0.4),
 
                 const SizedBox(height: 20),
 

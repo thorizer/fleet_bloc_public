@@ -85,6 +85,7 @@ class RtRepo extends Equatable {
     String? srv_dt,
     String? uid_dt,
     String? uid,
+    String? status,
   }) {
     return RtRepo(
       CANBUSDATA_dt: CANBUSDATA_dt ?? this.CANBUSDATA_dt,
@@ -101,6 +102,7 @@ class RtRepo extends Equatable {
       uid_dt: uid_dt ?? this.uid_dt,
       uid: uid ?? this.uid,
       working_time: working_time ?? this.working_time,
+      status: status ?? this.status,
     );
   }
 
@@ -124,6 +126,7 @@ class RtRepo extends Equatable {
       uid_dt,
       uid,
       working_time,
+      status,
     ];
   }
 }
