@@ -28,6 +28,9 @@ class HomePage extends StatelessWidget {
           ..add(RealtimeAssetSubscriptionRequested()),
         lazy: false,
         child: Scaffold(
+          appBar: AppBar(
+            title: const Text('NGI Fleet'),
+          ),
           drawer: const LeftDrawer(),
           endDrawer: const RightDrawer(),
           body: SafeArea(
