@@ -22,11 +22,6 @@ Without state management? I would just do this `realtimeData[asset.id] = asset.r
 
 **Could this be a limitation of state.copyWith when used with non-primitive values?**
 
-
-nothing much going on lib besides the asset feature (in asset_bloc you'll find _onRealtimeAssetSubscriptionRequested event who's responsible for the lag)
-
-the socket_api is inside the ngi_repository package
-
 Returning realtimeData map every time a state changes with socket.io is not very optimal.
 Without state management? I would just do this `realtimeData[asset.id] = asset.realtimeData;`
 
@@ -70,6 +65,10 @@ the event which subscribes to the stream looks like this:
         );
       }
 
+
+nothing much going on lib besides the asset feature (in asset_bloc you'll find _onRealtimeAssetSubscriptionRequested event who's responsible for the lag)
+
+the socket_api is inside the ngi_repository package
 
 
 
