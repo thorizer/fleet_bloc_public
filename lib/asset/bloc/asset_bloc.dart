@@ -89,7 +89,7 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
       onData: (asset) {
         print('${asset.name}');
         return state.copyWith(socketStatus: SocketStatus.success, rt: {
-          ...state.rt,
+          ...state.realtimeData,
           asset.id: RtRepo(
             CANBUSDATA: asset.rt?.CANBUSDATA,
             CANBUSDATA_dt: asset.rt?.CANBUSDATA_dt,

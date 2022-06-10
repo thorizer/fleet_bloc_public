@@ -87,7 +87,7 @@ class AssetsListSideBar extends StatelessWidget {
         return Builder(builder: (context) {
           final assetFromList = fleetAssets[index];
           final rtFromList = context.select(
-            (AssetBloc bloc) => bloc.state.rt[assetFromList.id],
+            (AssetBloc bloc) => bloc.state.realtimeData[assetFromList.id],
           );
           return SizedBox(
             height: 100,
@@ -153,7 +153,7 @@ class AssetRtImage extends StatelessWidget {
       (AssetBloc bloc) => bloc.state.fleetAssets[index].id,
     );
     final assetsRealtimeStatus = context.select(
-      (AssetBloc bloc) => bloc.state.rt[assetId]?.status ?? 'disabled',
+      (AssetBloc bloc) => bloc.state.realtimeData[assetId]?.status ?? 'disabled',
     );
     //final assetTypeR = assetType ?? 'Truck';
     //final assetsRealtimeMapStatusR = assetsRealtimeStatus ?? 'disabled';

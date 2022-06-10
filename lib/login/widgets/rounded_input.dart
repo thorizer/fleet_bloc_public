@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:gdm_bloc/login/components/input_container.dart';
+import 'package:gdm_bloc/login/widgets/input_container.dart';
 import 'package:gdm_bloc/shared/constants.dart';
 
-class RoundedPasswordInput extends StatelessWidget {
-  const RoundedPasswordInput({
+class RoundedInput extends StatelessWidget {
+  const RoundedInput({
     Key? key,
+    required this.icon,
     required this.hint,
-    required this.onChanged,
+    this.label,
     this.error,
+    required this.onChanged,
   }) : super(key: key);
 
+  final IconData icon;
   final String hint;
+  final String? label;
   final String? error;
   final void Function(String) onChanged;
 
@@ -21,10 +25,10 @@ class RoundedPasswordInput extends StatelessWidget {
         key: key,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
-        obscureText: true,
         decoration: InputDecoration(
-          icon: const Icon(Icons.lock, color: kPrimaryColor),
+          icon: Icon(icon, color: kPrimaryColor),
           hintText: hint,
+          labelText: label,
           errorText: error,
           filled: true,
           border: InputBorder.none,

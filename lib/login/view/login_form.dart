@@ -17,8 +17,8 @@ is being submitted.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:gdm_bloc/login/components/rounded_input.dart';
-import 'package:gdm_bloc/login/components/rounded_password_input.dart';
+import 'package:gdm_bloc/login/widgets/rounded_input.dart';
+import 'package:gdm_bloc/login/widgets/rounded_password_input.dart';
 import 'package:gdm_bloc/login/login.dart';
 import 'package:gdm_bloc/shared/constants.dart';
 
