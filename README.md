@@ -25,9 +25,8 @@ Could this be a limitation of state.copyWith when used with non-primitive values
 - Saving the socket data in a temporary map and then update the state after a while in a batch. doable ? 
 - finding a way to update a single asset without recreating the whole map with a spread operator. doable ? 
 
-**Feel free to ask for credentials if you want to test.**
-
 ## Project
+**Feel free to ask for credentials if you want to test.**
 
 The state in my block looks like the code below, the map contains the asset Id and it's corresponding Realtime data
 
