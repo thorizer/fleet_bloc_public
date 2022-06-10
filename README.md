@@ -70,7 +70,7 @@ the event which subscribes to the stream looks like this:
       }
 
 
-- nothing much going on lib besides the asset feature (in asset_bloc you'll find _onRealtimeAssetSubscriptionRequested event who's responsible for the lag)
+- nothing much going on lib besides the asset feature (in asset_bloc you'll find _onRealtimeAssetSubscriptionRequested event who's responsible for the jank and low fps)
 
 - the socket_api is inside the ngi_repository package
 
