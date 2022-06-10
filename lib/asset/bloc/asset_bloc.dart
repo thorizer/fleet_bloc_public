@@ -86,26 +86,29 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
     // performance issue
     await emit.forEach<Asset>(
       SocketApi.getAsset(),
-      onData: (asset) => state.copyWith(
-          socketStatus: SocketStatus.success,
-          rt: state.rt
-            ..[asset.id]?.copyWith(
-              CANBUSDATA: asset.rt?.CANBUSDATA,
-              CANBUSDATA_dt: asset.rt?.CANBUSDATA_dt,
-              consL_Km: asset.rt?.consL_Km,
-              gps_dt: asset.rt?.gps_dt,
-              io_dt: asset.rt?.io_dt,
-              last_stop_dt: asset.rt?.last_stop_dt,
-              loc_dt: asset.rt?.loc_dt,
-              odo: asset.rt?.odo,
-              srv_dt: asset.rt?.srv_dt,
-              uid: asset.rt?.uid,
-              uid_dt: asset.rt?.uid_dt,
-              working_time: asset.rt?.working_time,
-              loc: asset.rt?.loc,
-              io: asset.rt?.io,
-              status: const RtRepo().getStatut(asset.rt?.io),
-            )),
+      onData: (asset) {
+        print('${asset.name}');
+        return state.copyWith(socketStatus: SocketStatus.success, rt: {
+          ...state.rt,
+          asset.id: RtRepo(
+            CANBUSDATA: asset.rt?.CANBUSDATA,
+            CANBUSDATA_dt: asset.rt?.CANBUSDATA_dt,
+            consL_Km: asset.rt?.consL_Km,
+            gps_dt: asset.rt?.gps_dt,
+            io_dt: asset.rt?.io_dt,
+            last_stop_dt: asset.rt?.last_stop_dt,
+            loc_dt: asset.rt?.loc_dt,
+            odo: asset.rt?.odo,
+            srv_dt: asset.rt?.srv_dt,
+            uid: asset.rt?.uid,
+            uid_dt: asset.rt?.uid_dt,
+            working_time: asset.rt?.working_time,
+            loc: asset.rt?.loc,
+            io: asset.rt?.io,
+            status: const RtRepo().getStatut(asset.rt?.io),
+          ),
+        });
+      },
       onError: (_, __) => state.copyWith(
         socketStatus: SocketStatus.failure,
       ),

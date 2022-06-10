@@ -28,8 +28,7 @@ class MyHttpOverrides extends HttpOverrides {
         return isValidHost;
       };
   }
-} 
-
+}
 
 void main() {
   FlutterError.onError = (details) {
@@ -45,9 +44,8 @@ void main() {
           if (!kIsWeb) {
             final appDocumentDir = await getApplicationDocumentsDirectory();
             Hive.init(appDocumentDir.path);
-            await Hive.openBox<dynamic>('login');
           }
-
+          await Hive.openBox<dynamic>('login');
           final authenticationRepository = AuthenticationRepository();
           runApp(App(authenticationRepository: authenticationRepository));
         },

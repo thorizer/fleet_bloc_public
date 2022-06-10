@@ -42,6 +42,7 @@ class SocketApi {
     print('socket init connected: $status');
 
     if (status == 'disconnected') {
+      print('connecting');
       status = 'connecting';
       //print(status);
       socket.connect();
@@ -66,6 +67,13 @@ class SocketApi {
         print('socket instance disconnected');
         //status = 'disconnected';
       });
+      socket.onConnectError((dynamic _) => print(_));
+      socket.onConnectTimeout((dynamic _) => print('connect timeout'));
+      socket.onReconnect((dynamic _) => print('reconnect'));
+      socket.onReconnectAttempt((dynamic _) => print('reconnect attempt'));
+      socket.onReconnectFailed((dynamic _) => print('reconnect failed'));
+      socket.onReconnectError((dynamic _) => print('reconnect error'));
+      socket.onReconnecting((dynamic _) => print('reconnecting'));
     } else {
       print('socket instance already connected');
     }
@@ -78,10 +86,10 @@ class SocketApi {
   static IO.Socket socket = IO.io(
     TcFleetTunEnvironment.socketURL,
     IO.OptionBuilder()
-        .setTransports(['websocket'])
+        .setTransports(['websocket'])  //remove for web
         .disableAutoConnect()
         .enableForceNewConnection()
-        .setTimeout(5000)
+        .setTimeout(50000)
         .setReconnectionDelay(10000)
         .enableReconnection()
         .setQuery(
@@ -100,7 +108,7 @@ class SocketApi {
         try {
           streamSocket
               .addResponse(Asset.fromJson(data as Map<String, dynamic>));
-          print(data['name']);
+          //print(data['name']);
         } catch (e, stackTrace) {
           print('Exception newMsg');
           print(e);
