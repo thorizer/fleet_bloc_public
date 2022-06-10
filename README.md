@@ -24,8 +24,11 @@ Could this be a limitation of state.copyWith when used with non-primitive values
 ## Possible solutions: 🗝️
 - Saving the socket data in a temporary map and then update the state after a while in a batch. doable ? 
 - finding a way to update a single asset without recreating the whole map with a spread operator. doable ? 
-- using spread operator instead of map.of had a slightly better performance ✔
 - throttle the stream. doable ? 
+- using spread operator instead of map.of when emmiting a new state had a slightly better performance ✔
+- removing unnecessarily rebuilds didn't help, even SizedBox.shrink as child of scaffold whith 0 rebuilds ❌
+- splitiing the asset bloc features into asset and realtime will not help (I commented all the class members and kept the realtime object, I didn't update it with data coming from the socket, just spreading the object and give it back to the state , and the issue persisted ) ❌
+
 
 ## Project 🚧
 **Feel free to ask for credentials if you want to test.**
