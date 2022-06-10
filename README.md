@@ -27,7 +27,7 @@ Could this be a limitation of state.copyWith when used with non-primitive values
 - throttle the stream. doable ? 
 - using spread operator instead of map.of when emmiting a new state had a slightly better performance ✔
 - removing unnecessarily rebuilds didn't help, even SizedBox.shrink as child of scaffold whith 0 rebuilds ❌
-- splitiing the asset bloc features into asset and realtime will not help (I commented all the class members and kept the realtime object, I didn't update it with data coming from the socket, just spreading the object and give it back to the state , and the issue persisted ) ❌
+- splitiing the asset bloc features into asset and realtime will not help ( I commented all the class members and kept the realtime object, I didn't update it with data coming from the socket, just spreading the object and give it back to the state , and the issue persisted ) ❌
 
 
 ## Project 🚧
