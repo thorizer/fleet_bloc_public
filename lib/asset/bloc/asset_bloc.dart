@@ -31,14 +31,14 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
       final fleetAssets = assets.item1
           .where((asset) => asset.fleet!.contains(fleets.first.id))
           .toList();
+
       emit(
         state.copyWith(
           assets: assets.item1,
-          rt: assets.item2,
+          realtimeData: assets.item2,
           fleets: fleets,
           fleetAssets: fleetAssets,
           selectedFleet: fleets.first,
-          selectedAssets: fleetAssets,
           status: AssetStatus.success,
         ),
       );
@@ -58,7 +58,6 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
         state.copyWith(
           selectedFleet: event.fleet,
           fleetAssets: fleetAssets,
-          selectedAssets: fleetAssets,
         ),
       );
       print('${fleetAssets.length} assets of fleet ${event.fleet.name}');
@@ -70,44 +69,36 @@ class AssetBloc extends Bloc<AssetEvent, AssetState> {
     Emitter<AssetState> emit,
   ) async {
     await SocketApi.init();
-
-    //no performance issue
-    /*SocketApi.getAsset().listen(
-      (Asset data) {
-        print('Asset.1: ${data.name}');
-      },
-      cancelOnError: false,
-      onError: print,
-      onDone: () {
-        print('*** asset.1 stream controller Done ***');
-      },
-    );*/
-
-    // performance issue
-    await emit.forEach<Asset>(
+    await emit.onEach<Asset>(
       SocketApi.getAsset(),
       onData: (asset) {
-        print('${asset.name}');
-        return state.copyWith(socketStatus: SocketStatus.success, rt: {
-          ...state.realtimeData,
-          asset.id: RtRepo(
-            CANBUSDATA: asset.rt?.CANBUSDATA,
-            CANBUSDATA_dt: asset.rt?.CANBUSDATA_dt,
-            consL_Km: asset.rt?.consL_Km,
-            gps_dt: asset.rt?.gps_dt,
-            io_dt: asset.rt?.io_dt,
-            last_stop_dt: asset.rt?.last_stop_dt,
-            loc_dt: asset.rt?.loc_dt,
-            odo: asset.rt?.odo,
-            srv_dt: asset.rt?.srv_dt,
-            uid: asset.rt?.uid,
-            uid_dt: asset.rt?.uid_dt,
-            working_time: asset.rt?.working_time,
-            loc: asset.rt?.loc,
-            io: asset.rt?.io,
-            status: const RtRepo().getStatut(asset.rt?.io),
-          ),
-        });
+        if (state.selectedFleet != null && state.fleetAssets.isNotEmpty) {
+          //print(asset.rt?.gps_dt);
+          emit(state.copyWith(
+              socketStatus: SocketStatus.success,
+              lastRtGpsDt: asset.rt?.gps_dt,
+              realtimeData: {
+                ...state.realtimeData,
+                asset.id: RtRepo(
+                  CANBUSDATA: asset.rt?.CANBUSDATA,
+                  CANBUSDATA_dt: asset.rt?.CANBUSDATA_dt,
+                  consL_Km: asset.rt?.consL_Km,
+                  gps_dt: asset.rt?.gps_dt,
+                  io_dt: asset.rt?.io_dt,
+                  last_stop_dt: asset.rt?.last_stop_dt,
+                  loc_dt: asset.rt?.loc_dt,
+                  odo: asset.rt?.odo,
+                  srv_dt: asset.rt?.srv_dt,
+                  uid: asset.rt?.uid,
+                  uid_dt: asset.rt?.uid_dt,
+                  working_time: asset.rt?.working_time,
+                  loc: asset.rt?.loc,
+                  io: asset.rt?.io,
+                  status:
+                      const RtRepo().getStatut(asset.rt?.io, asset.rt?.gps_dt),
+                ),
+              }));
+        }
       },
       onError: (_, __) => state.copyWith(
         socketStatus: SocketStatus.failure,

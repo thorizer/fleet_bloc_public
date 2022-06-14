@@ -57,11 +57,11 @@ void main() {
 }
 
 class AppBlocObserver extends BlocObserver {
-  /* @override
+  @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
     log('onChange(${bloc.runtimeType}, $change)');
-  } */
+  }
 
   /* @override
   void onTransition(Bloc bloc, Transition transition) {

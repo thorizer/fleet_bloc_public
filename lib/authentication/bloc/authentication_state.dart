@@ -44,5 +44,5 @@ class AuthenticationState extends Equatable {
   final Map<String, dynamic>? userData;
 
   @override
-  List<Object?> get props => [status, user, userData, expirationDate, companyOwner, childroles, permissions];
+  List<Object?> get props => [status, user?.id];
 }

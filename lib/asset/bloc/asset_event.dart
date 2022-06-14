@@ -15,7 +15,7 @@ class FleetSelected extends AssetEvent {
   final Fleet fleet;
 
   @override
-  List<Object> get props => [fleet];
+  List<Object> get props => [fleet.id];
 }
 
 class RealtimeAssetsLoaded extends AssetEvent {}

@@ -49,7 +49,7 @@ class AssetRepository {
         working_time: asset.rt?.working_time,
         loc: asset.rt?.loc,
         io: asset.rt?.io,
-        status: const RtRepo().getStatut(asset.rt?.io),
+        status: const RtRepo().getStatut(asset.rt?.io, asset.rt?.gps_dt),
       );
       assetsRt[asset.id] = rtrep;
       final fleetIds = <String>[];

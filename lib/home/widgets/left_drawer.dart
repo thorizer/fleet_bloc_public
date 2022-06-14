@@ -86,9 +86,15 @@ class AssetsListSideBar extends StatelessWidget {
       itemBuilder: (context, index) {
         return Builder(builder: (context) {
           final assetFromList = fleetAssets[index];
+
           final rtFromList = context.select(
             (AssetBloc bloc) => bloc.state.realtimeData[assetFromList.id],
           );
+          final isAftertime = DateTime.now()
+              .subtract(const Duration(seconds: 30))
+              .isAfter(DateTime.parse(
+                  rtFromList?.gps_dt ?? '2021-01-01T00:00:00.000Z'));
+
           return SizedBox(
             height: 100,
             child: Card(
@@ -105,9 +111,26 @@ class AssetsListSideBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Flexible(
-                    child: Text(assetFromList.name ?? 'Unnamed'),
-                  )
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Flexible(
+                          child: Text(assetFromList.name ?? 'Unnamed'),
+                        ),
+                        Flexible(
+                          child: Text(
+                              DateTime.parse(rtFromList?.gps_dt ??
+                                      '2021-01-01T00:00:00.000Z')
+                                  .toLocal()
+                                  .toString(),
+                              style: isAftertime
+                                  ? TextStyle(fontSize: 16, color: Colors.red)
+                                  : TextStyle(
+                                      fontSize: 16, color: Colors.green)),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -153,7 +176,8 @@ class AssetRtImage extends StatelessWidget {
       (AssetBloc bloc) => bloc.state.fleetAssets[index].id,
     );
     final assetsRealtimeStatus = context.select(
-      (AssetBloc bloc) => bloc.state.realtimeData[assetId]?.status ?? 'disabled',
+      (AssetBloc bloc) =>
+          bloc.state.realtimeData[assetId]?.status ?? 'disabled',
     );
     //final assetTypeR = assetType ?? 'Truck';
     //final assetsRealtimeMapStatusR = assetsRealtimeStatus ?? 'disabled';

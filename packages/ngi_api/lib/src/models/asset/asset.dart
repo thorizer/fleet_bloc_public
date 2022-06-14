@@ -209,33 +209,7 @@ class Asset extends Equatable {
   @override
   List<Object?> get props {
     return [
-      alerts,
-      attributes,
-      brand,
-      codeProduct,
-      company_owner,
-      createdBy,
-      creation_dt,
-      Detailtype,
-      dev,
-      disabled,
-      fleet,
-      fuel,
       id,
-      idCard,
-      meterType,
-      model,
-      modif_dt,
-      name,
-      notMonitor,
-      product_total,
-      rt,
-      sensors,
-      stial_daily_odo,
-      stial_name,
-      stial_odo_dt,
-      stial_odo,
-      type,
     ];
   }
 }
@@ -341,24 +315,9 @@ class Sensor extends Equatable {
   @override
   List<Object?> get props {
     return [
-      disableFuelInStop,
-      enableFuelInStop,
-      enableFuncPolynomial,
       family,
       id,
-      isAbsolute,
-      max,
-      maxSrc,
-      min,
-      minSrc,
-      name,
-      off,
-      on,
-      refuelingConfig,
-      src,
       type,
-      unit,
-      visible,
     ];
   }
 }
@@ -439,7 +398,7 @@ class Loc extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [coordinates_dt, coordinates, type_dt, type];
+  List<Object?> get props => [coordinates];
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -526,20 +485,10 @@ class Rt extends Equatable {
   @override
   List<Object?> get props {
     return [
-      CANBUSDATA_dt,
-      CANBUSDATA,
-      consL_Km,
       gps_dt,
-      io_dt,
-      io,
-      last_stop_dt,
-      loc_dt,
       loc,
-      odo,
       srv_dt,
-      uid_dt,
       uid,
-      working_time,
     ];
   }
 }

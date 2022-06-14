@@ -45,16 +45,21 @@ class RtRepo extends Equatable {
   final String? uid_dt;
   final String? uid;
 
-  String getStatut(Map<String, Object?>? io) {
+  String getStatut(Map<String, Object?>? io, String? gps_dt) {
+    final gps_date = DateTime.parse(gps_dt ?? '2020-01-01');
+    //now
+    final now = DateTime.now();
+    final dateLessThanThreeDays = now.subtract(const Duration(days: 3));
+    final validGpsDate = (gps_date.isAfter(dateLessThanThreeDays));
     if (io?['spd'] != null &&
         io?['con'] != null &&
         io?['spd'] is num &&
         io?['con'] is num) {
-      if (io!['con'] == 1 && io['spd']! as num > 0) {
+      if (io!['con'] == 1 && io['spd']! as num > 0 && validGpsDate) {
         return 'drive';
-      } else if (io['con'] == 1 && io['spd']! as num == 0) {
+      } else if (io['con'] == 1 && io['spd']! as num == 0 && validGpsDate) {
         return 'idle';
-      } else if (io['con'] == 0) {
+      } else if (io['con'] == 0 && validGpsDate) {
         return 'stop';
       }
     }
@@ -112,21 +117,10 @@ class RtRepo extends Equatable {
   @override
   List<Object?> get props {
     return [
-      CANBUSDATA_dt,
-      CANBUSDATA,
-      consL_Km,
       gps_dt,
-      io_dt,
-      io,
-      last_stop_dt,
-      loc_dt,
-      loc,
-      odo,
+      loc?.coordinates,
       srv_dt,
-      uid_dt,
       uid,
-      working_time,
-      status,
     ];
   }
 }
